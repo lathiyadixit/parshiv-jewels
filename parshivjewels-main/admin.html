@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · Parshiv Jewels</title>
+<!-- A private business tool: never index it, never follow links from it. -->
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0a0806">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+<!-- ═══ RUNTIME CONFIG ═══
+     Deployment values. ADMIN_PASSCODE only gates the UI — see the
+     security note in the README before exposing this page publicly. -->
+<script>
+window.__ENV__ = {
+  NEXT_PUBLIC_WHATSAPP_NUMBER: '916351916996',
+  NEXT_PUBLIC_FORCE_HASH_ROUTING: 'false',
+  ADMIN_EMAIL: 'admin@parshivjewels.in',
+  ADMIN_PASSCODE: 'parshiv-admin'
+};
+/* Apply the saved theme before first paint. */
+(function () {
+  try {
+    var stored = JSON.parse(localStorage.getItem('pj.theme.v1'));
+    var theme = stored === 'dark' || stored === 'light'
+      ? stored : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+
+<!-- ═══ 2. FONTS + TAILWIND ═══ -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{
+  colors:{
+    // Every colour resolves through a CSS variable, so the light/dark
+    // palettes below swap the whole site without touching a single class.
+    night:'rgb(var(--c-night) / <alpha-value>)',
+    onyx:'rgb(var(--c-onyx) / <alpha-value>)',
+    card:'rgb(var(--c-card) / <alpha-value>)',
+    ivory:'rgb(var(--c-ivory) / <alpha-value>)',
+    sand:'rgb(var(--c-sand) / <alpha-value>)',
+    gold:{
+      DEFAULT:'rgb(var(--c-gold) / <alpha-value>)',
+      light:'rgb(var(--c-gold-light) / <alpha-value>)',
+      deep:'rgb(var(--c-gold-deep) / <alpha-value>)'
+    },
+    ink:'rgb(var(--c-ink) / <alpha-value>)',    // text on a gold fill — always dark
+    success:'rgb(var(--c-success) / <alpha-value>)',
+    danger:'rgb(var(--c-danger) / <alpha-value>)',
+    line:'rgb(var(--c-line) / <alpha-value>)',  // hairline borders
+    veil:'rgb(var(--c-veil) / <alpha-value>)'   // modal + drawer scrims
+  },
+  fontFamily:{
+    display:['Cinzel','serif'],
+    accent:['"Cormorant Garamond"','serif'],
+    body:['Jost','sans-serif']
+  },
+  // The colour-opacity modifier (border-line/15) resolves against this
+  // scale. Custom colours only generate steps declared here, unlike the
+  // built-in `white`, so the non-default steps the design uses are added.
+  opacity:{15:'0.15',85:'0.85'},
+  boxShadow:{
+    soft:'0 24px 60px rgba(0,0,0,.45)',
+    glow:'0 14px 44px rgba(210,168,79,.25)',
+    lift:'0 10px 30px rgba(0,0,0,.5)'
+  }
+}}}
+</script>
+<script>function imgFix(el){el.onerror=null;el.removeAttribute('srcset');el.removeAttribute('sizes');el.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1200&auto=format&fit=crop';el.classList.add('img-in');}</script>
+
+<!-- ═══ 3. STYLES ═══ -->
+<style type="text/tailwindcss">
+  /* ── Palettes ───────────────────────────────────────────────
+     Dark is the house default. Light is a warm ivory reading of the
+     same brand — never a plain white sheet. Values are space-separated
+     RGB channels so Tailwind can apply its own opacity modifiers. */
+  :root{
+    color-scheme:dark;
+    --c-night:10 8 6;
+    --c-onyx:18 14 9;
+    --c-card:26 21 16;
+    --c-ivory:245 237 220;
+    --c-sand:179 167 143;
+    --c-gold:210 168 79;
+    --c-gold-light:241 220 159;
+    --c-gold-deep:143 108 37;
+    --c-ink:10 8 6;
+    --c-line:255 255 255;
+    --c-veil:0 0 0;
+    --c-success:74 222 128;
+    --c-danger:252 165 165;
+    --grad-rule:linear-gradient(90deg,#8f6c25,#f1dc9f);
+    --grad-rule-c:linear-gradient(90deg,transparent,#d2a84f,transparent);
+    --grad-shimmer:linear-gradient(110deg,#8f6c25 20%,#fdf3cf 40%,#d2a84f 55%,#8f6c25 80%);
+    --grad-skeleton:linear-gradient(100deg,#1a1510 30%,#241d15 50%,#1a1510 70%);
+    --sparkle:#f1dc9f;
+    --sheen:rgba(241,220,159,.14);
+  }
+  html[data-theme="light"]{
+    color-scheme:light;
+    --c-night:250 247 241;   /* page */
+    --c-onyx:243 237 227;    /* header, footer, drawers */
+    --c-card:255 253 250;    /* cards */
+    --c-ivory:31 24 17;      /* primary text */
+    --c-sand:105 92 75;      /* secondary text */
+    --c-gold:146 108 35;     /* accent, contrast-safe on ivory */
+    --c-gold-light:122 89 26;/* emphasis text — darker, not lighter, here */
+    --c-gold-deep:176 138 60;
+    --c-ink:255 252 246;     /* on the gold fill, which stays dark in light mode */
+    --c-line:47 36 24;
+    --c-veil:38 29 20;
+    --c-success:21 118 58;
+    --c-danger:176 32 32;
+    --grad-rule:linear-gradient(90deg,#b08a3c,#7a5c1e);
+    --grad-rule-c:linear-gradient(90deg,transparent,#926c23,transparent);
+    --grad-shimmer:linear-gradient(110deg,#7a5c1e 20%,#c9a44e 40%,#8f6c25 55%,#7a5c1e 80%);
+    --grad-skeleton:linear-gradient(100deg,#efe9df 30%,#f7f3ec 50%,#efe9df 70%);
+    --sparkle:#b08a3c;
+    --sheen:rgba(143,108,37,.12);
+  }
+
+  ::selection{@apply bg-gold text-ink}
+  html{scroll-behavior:smooth;font-size:17px}
+  body{overflow-x:hidden}
+  ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:rgb(var(--c-night))}
+  ::-webkit-scrollbar-thumb{background:var(--grad-rule);border-radius:99px}
+
+  img{opacity:0;transition:opacity .6s ease}
+  img.img-in{opacity:1}
+
+  .eyebrow{@apply flex items-center gap-3 font-body text-xs font-medium uppercase tracking-[0.42em] text-gold}
+  .eyebrow::before,.eyebrow::after{content:'';@apply h-px w-10 bg-gold/50}
+  .accent-it{@apply font-accent italic font-semibold text-gold}
+
+  .btn-gold{@apply relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-r from-gold-deep via-gold to-gold-light font-body text-sm font-semibold uppercase tracking-[0.2em] text-ink transition duration-300 hover:scale-[1.04] hover:shadow-glow active:scale-95}
+  .btn-gold::after{content:'';@apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition duration-700}
+  .btn-gold:hover::after{@apply translate-x-full}
+  .btn-line{@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gold/40 font-body text-sm uppercase tracking-[0.2em] text-gold-light transition duration-300 hover:border-gold hover:bg-gold/10 hover:shadow-glow}
+  .btn-gold:disabled,.btn-line:disabled{@apply pointer-events-none}
+  /* Baseline breathing room, so a call site that forgets px-* can never end up
+     with its label touching the border.
+     The type selector is deliberate: Tailwind's preflight sets
+     `button{padding:0}` at specificity 0,0,1, which a bare :where() (0,0,0)
+     loses to. Matching on the element ties preflight and wins on source
+     order, while any explicit px-* utility (0,1,0) still overrides this. */
+  button:where(.btn-gold,.btn-line),
+  a:where(.btn-gold,.btn-line){padding-inline:1.5rem}
+  /* Card footers are narrow; the base 0.2em tracking overflows a half-width
+     button and gets clipped by .btn-gold's overflow-hidden. */
+  .btn-gold.btn-compact,.btn-line.btn-compact{@apply px-2.5 py-2.5 text-[11px] tracking-[0.08em]}
+
+  /* Native number spinners look like a browser control dropped into the page;
+     quantity is driven by the − / + buttons instead. */
+  input[type=number]{-moz-appearance:textfield;appearance:textfield}
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+  /* Quantity stepper — one pill, so it reads as a single control. */
+  .qty{@apply inline-flex items-center gap-1 rounded-full border border-line/15 bg-night/60 p-1}
+  .qty button{@apply flex items-center justify-center rounded-full text-ivory transition hover:bg-gold/15 hover:text-gold-light disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent disabled:hover:text-ivory}
+  .qty input{@apply border-0 bg-transparent text-center text-ivory outline-none focus:ring-0}
+
+  .field{@apply w-full rounded-full border border-line/10 bg-night/70 px-5 py-3 text-[15px] text-ivory placeholder-sand/50 outline-none transition focus:border-gold/70 focus:ring-1 focus:ring-gold/40}
+  textarea.field{@apply rounded-[1.75rem]}
+  .panel{@apply rounded-2xl border border-line/5 bg-card}
+
+  .nav-link{@apply relative py-2 font-body text-[13px] font-medium uppercase tracking-[0.26em] text-ivory/80 transition hover:text-gold-light}
+  .nav-link::after{content:'';@apply absolute bottom-0 left-1/2 h-px w-0 -translate-x-1/2 bg-gold transition-all duration-300}
+  .nav-link:hover::after,.nav-link.active::after{@apply w-full}
+  .nav-link.active{@apply text-gold}
+  .nav-sale{@apply text-gold-light}
+
+  .chip{@apply inline-flex items-center rounded-full border border-line/15 px-5 py-2 font-body text-[12px] uppercase tracking-[0.22em] text-sand transition duration-300 hover:border-gold hover:text-gold-light}
+  .chip.chip-on{@apply border-gold bg-gold/10 text-gold-light}
+
+  .csel .cs-menu{@apply absolute left-0 right-0 z-40 mt-2 hidden origin-top overflow-hidden rounded-2xl border border-gold/25 bg-onyx/95 shadow-lift backdrop-blur-xl}
+  .csel.open .cs-menu{@apply block}
+  @keyframes menuIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+  .csel.open .cs-menu{animation:menuIn .22s ease both}
+  .csel.open .cs-chev{@apply rotate-180}
+  .cs-opt{@apply block w-full px-5 py-3 text-left text-[15px] text-ivory/80 transition hover:bg-gold/10 hover:text-gold-light}
+
+  /* ── Mega menu ──
+     The panel is centred on the header, not on its trigger — anchoring it to
+     the nav item pushes a wide panel off the left edge of the viewport. */
+  #primaryNav{@apply relative}
+  .mega{@apply static}
+  .mega-panel{@apply pointer-events-none invisible absolute left-1/2 top-full z-50 w-[min(1300px,94vw)] -translate-x-1/2 translate-y-2 rounded-2xl border border-gold/25 bg-onyx opacity-0 shadow-lift transition duration-300}
+  .mega:hover .mega-panel,.mega.open .mega-panel{@apply pointer-events-auto visible translate-y-0 opacity-100}
+  /* Invisible bridge across the gap between trigger and panel, so travelling
+     down to the menu doesn't drop :hover and flicker it shut. */
+  .mega-panel::before{content:'';@apply absolute -top-7 left-0 right-0 h-7}
+  .mega:hover>.nav-link::after,.mega.open>.nav-link::after{@apply w-full}
+  .mega:hover>.nav-link svg,.mega.open>.nav-link svg{@apply rotate-180}
+
+  /* ── Loading skeletons ── */
+  .skeleton{background:var(--grad-skeleton);background-size:200% 100%;animation:skel 1.4s ease-in-out infinite}
+  @keyframes skel{to{background-position:-200% 0}}
+
+  /* ── Search overlay ── */
+  .search-active{@apply border-gold/60 bg-gold/10}
+
+  .shimmer{background:var(--grad-shimmer);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
+  @keyframes shimmer{to{background-position:200% center}}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  .marquee-track{display:flex;width:max-content;animation:marquee var(--sp,28s) linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes kb{0%,100%{transform:scale(1)}50%{transform:scale(1.08) translateY(-8px)}}
+  .kenburns img{animation:kb 16s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .floaty{animation:floaty 5s ease-in-out infinite}
+  @keyframes sparkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.9;transform:scale(1) rotate(90deg)}}
+  .sparkle{position:absolute;width:7px;height:7px;background:var(--sparkle);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:sparkle 3.2s ease-in-out infinite;pointer-events:none}
+  @keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .page-anim{animation:pageIn .5s cubic-bezier(.22,1,.36,1) both}
+  @keyframes dropLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  .scroll-line span{animation:dropLine 2.2s cubic-bezier(.65,0,.35,1) infinite}
+
+  .shine{position:relative;overflow:hidden}
+  .shine::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,var(--sheen) 50%,transparent 60%);transform:translateX(-130%);transition:transform 1s ease;pointer-events:none}
+  .shine:hover::after{transform:translateX(130%)}
+  .tilt{position:relative}
+  .frame::before{content:'';@apply pointer-events-none absolute inset-3 border border-gold/0 transition duration-500}
+  .frame:hover::before{@apply border-gold/60}
+
+  .draw,.draw-c{position:relative}
+  .draw::after,.draw-c::after{content:'';position:absolute;bottom:-10px;left:0;height:1px;width:100%;background:var(--grad-rule);transform:scaleX(0);transform-origin:left;transition:transform 1.1s ease .25s}
+  .draw-c::after{background:var(--grad-rule-c);transform-origin:center}
+  [data-reveal].revealed .draw::after,[data-reveal].revealed .draw-c::after,[data-reveal].revealed.draw::after,[data-reveal].revealed.draw-c::after{transform:scaleX(1)}
+
+  .f-link{@apply relative transition duration-300}
+  .f-link::before{content:'◆';@apply absolute left-0 top-1/2 -translate-y-1/2 text-[9px] text-gold opacity-0 transition duration-300}
+  .f-link:hover{@apply pl-4 text-gold-light}
+  .f-link:hover::before{@apply opacity-100}
+
+  [data-reveal]{opacity:0;transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+  [data-reveal="up"]{transform:translateY(40px)}[data-reveal="left"]{transform:translateX(-46px)}
+  [data-reveal="right"]{transform:translateX(46px)}[data-reveal="zoom"]{transform:scale(.92)}
+  [data-reveal].revealed{opacity:1;transform:none}
+  /* block, not inline, so a heading that wraps grows its own box */
+  .mask-line{display:block;overflow:hidden}
+  .mask-line>span{display:block;transform:translateY(115%);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+  body.loaded .mask-line>span{transform:none}
+
+  .faq-item .acc-body,.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+  .faq-item.open .acc-body,.acc-body.open{grid-template-rows:1fr}
+  .faq-item.open{@apply border-gold/40}
+  .faq-item.open .faq-v{transform:rotate(0)}
+  .faq-item.open .faq-q{@apply text-gold-light}
+
+  #toast{@apply pointer-events-none fixed bottom-8 left-1/2 z-[130] -translate-x-1/2 translate-y-5 rounded-full border border-gold/50 bg-onyx/95 px-7 py-3 text-[15px] tracking-wide text-gold-light opacity-0 shadow-glow backdrop-blur transition-all duration-300}
+  #toast.show{@apply translate-y-0 opacity-100}
+  #toast.toast-error{@apply border-danger/50 text-danger}
+  @keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+  .pop{animation:pop .4s ease}
+  /* Matches the storefront: the pale gold mark needs a whisper of shadow
+     to hold its shape against the ivory ground in light mode. */
+  /* The global img{opacity:0} fade is cleared by the app once a page renders.
+     Chrome logos load before that runs, so they must never depend on it —
+     the brand mark paints even if JavaScript fails entirely. */
+  .brand-logo{opacity:1;filter:drop-shadow(0 1px 2px rgb(0 0 0 / .35))}
+  /* The logo's highlights run to near-white, which disappears against ivory.
+     Darkening and enriching them keeps the mark legible without recolouring it. */
+  html[data-theme="light"] .brand-logo{filter:drop-shadow(0 1px 1px rgb(90 68 26 / .3)) saturate(1.18) brightness(.84) contrast(1.06)}
+
+  .social{@apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line/15 text-sand transition duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold hover:shadow-glow}
+
+  /* Show the mode you're switching TO, matching the button's aria-label:
+     a sun while dark, a moon while light. */
+  .icon-to-dark{@apply hidden}
+  html[data-theme="light"] .icon-to-dark{@apply block}
+  html[data-theme="light"] .icon-to-light{@apply hidden}
+
+  /* Artwork drawn on a black ground keeps a dark panel in both palettes. */
+  .panel-artwork{background:#0f0c09}
+
+  /* Respect reduced-motion preferences across every decorative animation. */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+    .marquee-track{animation:none}
+  }
+</style>
+
+<style type="text/tailwindcss">
+  /* ── Admin-only components ──────────────────────────────────
+     Built from the storefront tokens so the panel is unmistakably
+     the same brand, laid out for work rather than for browsing. */
+  .admin-input{@apply w-full rounded-xl border border-line/10 bg-night/60 px-4 py-2.5 text-[13px] text-ivory placeholder-sand/40 outline-none transition focus:border-gold/60 focus:ring-1 focus:ring-gold/30}
+  .admin-select{@apply cursor-pointer appearance-none bg-[length:14px] bg-[right_0.9rem_center] bg-no-repeat pr-10}
+  .admin-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d2a84f' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+  .admin-date{@apply bg-transparent text-[11px] text-ivory outline-none [color-scheme:dark]}
+  html[data-theme="light"] .admin-date{@apply [color-scheme:light]}
+
+  .admin-check{@apply h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-[4px] border border-line/25 bg-night/60 transition checked:border-gold checked:bg-gold}
+  .admin-check:checked{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0806' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");background-size:11px;background-position:center;background-repeat:no-repeat}
+
+  .admin-icon-btn{@apply inline-flex h-8 w-8 items-center justify-center rounded-lg border border-line/10 text-[13px] text-sand transition hover:border-gold/50 hover:text-gold disabled:cursor-not-allowed disabled:opacity-30}
+
+  .admin-tab{@apply shrink-0 whitespace-nowrap rounded-t-lg border-b-2 border-transparent px-4 py-2.5 text-[12px] uppercase tracking-[0.12em] text-sand transition hover:text-ivory}
+  .admin-tab-on{@apply border-gold text-gold-light}
+
+  .chart-tab{@apply rounded-full border border-line/10 px-3 py-1.5 text-[11px] uppercase tracking-[0.1em] text-sand transition hover:border-gold/50 hover:text-ivory}
+  .chart-tab-on{@apply border-gold bg-gold/10 text-gold-light}
+
+  .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #adminMain table{border-collapse:separate;border-spacing:0}
+</style>
+
+</head>
+
+<body class="bg-night font-body text-sand antialiased">
+<script type="module" src="/assets/js/admin/admin.js"></script>
+<noscript>
+  <div class="mx-auto max-w-lg px-6 py-20 text-center">
+    <h1 class="font-display text-2xl text-ivory">JavaScript is required</h1>
+    <p class="mt-3 text-[14px]">The admin panel needs JavaScript enabled.</p>
+  </div>
+</noscript>
+</body>
+</html>

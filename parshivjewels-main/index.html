@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ════════════════════════════════════════════════════════════
+     PARSHIV JEWELS — Noir Maison
+     1.SEO  2.FONTS/TAILWIND  3.STYLES  4.LAYOUT
+     5.APP MOUNT  6.COMPONENTS  7.ENGINE (assets/js)
+═════════════════════════════════════════════════════════════ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══ 1. SEO ═══ -->
+<title>PARSHIV JEWELS — Timeless Elegance, Crafted to Shine | Luxury Jewellery Surat</title>
+<meta name="description" content="Parshiv Jewels, Surat — BIS-hallmarked rings, necklaces, earrings &amp; bracelets. Certified stones, insured shipping, 30-day returns. Order directly on WhatsApp.">
+<meta name="keywords" content="jewellery Surat, diamond necklace, gold rings, jhumka earrings, bridal jewellery, Parshiv Jewels">
+<meta name="author" content="Parshiv Jewels">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0806">
+<link rel="canonical" href="https://parshivjewels.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Parshiv Jewels">
+<meta property="og:locale" content="en_IN">
+<meta property="og:title" content="PARSHIV JEWELS — Timeless Elegance, Crafted to Shine">
+<meta property="og:description" content="Exquisite certified jewellery from Surat. Order on WhatsApp with insured delivery.">
+<meta property="og:url" content="https://parshivjewels.in/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1200&auto=format&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PARSHIV JEWELS — Luxury Jewellery Surat">
+<meta name="twitter:description" content="Certified, hallmarked jewellery. Order on WhatsApp.">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1200&auto=format&fit=crop">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"JewelryStore","name":"Parshiv Jewels","url":"https://parshivjewels.in/","telephone":"+916351916996","email":"Parshivjewels.in@gmail.com","priceRange":"₹₹","address":{"@type":"PostalAddress","streetAddress":"102, Shiv Narayan House, Kansara Seri, Mahidharpura","addressLocality":"Surat","addressRegion":"Gujarat","postalCode":"395003","addressCountry":"IN"},"sameAs":["https://www.instagram.com/parshivjewels.in/","https://wa.me/916351916996"],"openingHours":"Mo-Sa 09:00-18:00","foundingDate":"2026"},
+ {"@type":"WebSite","name":"Parshiv Jewels","url":"https://parshivjewels.in/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://parshivjewels.in/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}]}
+</script>
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/favicon.png">
+
+<!-- ═══ RUNTIME CONFIG ═══
+     Static hosting has no build-time env substitution, so deployment
+     values live here. Equivalent to NEXT_PUBLIC_WHATSAPP_NUMBER. -->
+<script>
+/* Applied before first paint so the page never flashes the wrong palette. */
+(function () {
+  try {
+    var stored = JSON.parse(localStorage.getItem('pj.theme.v1'));
+    var theme = stored === 'dark' || stored === 'light'
+      ? stored
+      : (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+    if (theme === 'light') {
+      document.addEventListener('DOMContentLoaded', function () {
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', '#faf7f1');
+      });
+    }
+  } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+})();
+</script>
+<script>
+window.__ENV__ = {
+  NEXT_PUBLIC_WHATSAPP_NUMBER: '916351916996',
+  // Set to 'true' only if your host cannot rewrite unknown paths to
+  // index.html (see .htaccess). URLs then become /#/shop instead of /shop.
+  NEXT_PUBLIC_FORCE_HASH_ROUTING: 'false'
+};
+</script>
+
+<!-- Perf -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1000&auto=format&fit=crop">
+<link rel="modulepreload" href="/assets/js/app.js">
+
+<!-- ═══ 2. FONTS + TAILWIND ═══ -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{
+  colors:{
+    // Every colour resolves through a CSS variable, so the light/dark
+    // palettes below swap the whole site without touching a single class.
+    night:'rgb(var(--c-night) / <alpha-value>)',
+    onyx:'rgb(var(--c-onyx) / <alpha-value>)',
+    card:'rgb(var(--c-card) / <alpha-value>)',
+    ivory:'rgb(var(--c-ivory) / <alpha-value>)',
+    sand:'rgb(var(--c-sand) / <alpha-value>)',
+    gold:{
+      DEFAULT:'rgb(var(--c-gold) / <alpha-value>)',
+      light:'rgb(var(--c-gold-light) / <alpha-value>)',
+      deep:'rgb(var(--c-gold-deep) / <alpha-value>)'
+    },
+    ink:'rgb(var(--c-ink) / <alpha-value>)',    // text on a gold fill — always dark
+    success:'rgb(var(--c-success) / <alpha-value>)',
+    danger:'rgb(var(--c-danger) / <alpha-value>)',
+    line:'rgb(var(--c-line) / <alpha-value>)',  // hairline borders
+    veil:'rgb(var(--c-veil) / <alpha-value>)'   // modal + drawer scrims
+  },
+  fontFamily:{
+    display:['Cinzel','serif'],
+    accent:['"Cormorant Garamond"','serif'],
+    body:['Jost','sans-serif']
+  },
+  // The colour-opacity modifier (border-line/15) resolves against this
+  // scale. Custom colours only generate steps declared here, unlike the
+  // built-in `white`, so the non-default steps the design uses are added.
+  opacity:{15:'0.15',85:'0.85'},
+  boxShadow:{
+    soft:'0 24px 60px rgba(0,0,0,.45)',
+    glow:'0 14px 44px rgba(210,168,79,.25)',
+    lift:'0 10px 30px rgba(0,0,0,.5)'
+  }
+}}}
+</script>
+<script>function imgFix(el){el.onerror=null;el.removeAttribute('srcset');el.removeAttribute('sizes');el.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1200&auto=format&fit=crop';el.classList.add('img-in');}</script>
+
+<!-- ═══ 3. STYLES ═══ -->
+<style type="text/tailwindcss">
+  /* ── Palettes ───────────────────────────────────────────────
+     Dark is the house default. Light is a warm ivory reading of the
+     same brand — never a plain white sheet. Values are space-separated
+     RGB channels so Tailwind can apply its own opacity modifiers. */
+  :root{
+    color-scheme:dark;
+    --c-night:10 8 6;
+    --c-onyx:18 14 9;
+    --c-card:26 21 16;
+    --c-ivory:245 237 220;
+    --c-sand:179 167 143;
+    --c-gold:210 168 79;
+    --c-gold-light:241 220 159;
+    --c-gold-deep:143 108 37;
+    --c-ink:10 8 6;
+    --c-line:255 255 255;
+    --c-veil:0 0 0;
+    --c-success:74 222 128;
+    --c-danger:252 165 165;
+    --grad-rule:linear-gradient(90deg,#8f6c25,#f1dc9f);
+    --grad-rule-c:linear-gradient(90deg,transparent,#d2a84f,transparent);
+    --grad-shimmer:linear-gradient(110deg,#8f6c25 20%,#fdf3cf 40%,#d2a84f 55%,#8f6c25 80%);
+    --grad-skeleton:linear-gradient(100deg,#1a1510 30%,#241d15 50%,#1a1510 70%);
+    --sparkle:#f1dc9f;
+    --sheen:rgba(241,220,159,.14);
+  }
+  html[data-theme="light"]{
+    color-scheme:light;
+    --c-night:250 247 241;   /* page */
+    --c-onyx:243 237 227;    /* header, footer, drawers */
+    --c-card:255 253 250;    /* cards */
+    --c-ivory:31 24 17;      /* primary text */
+    --c-sand:105 92 75;      /* secondary text */
+    --c-gold:146 108 35;     /* accent, contrast-safe on ivory */
+    --c-gold-light:122 89 26;/* emphasis text — darker, not lighter, here */
+    --c-gold-deep:176 138 60;
+    --c-ink:255 252 246;     /* on the gold fill, which stays dark in light mode */
+    --c-line:47 36 24;
+    --c-veil:38 29 20;
+    --c-success:21 118 58;
+    --c-danger:176 32 32;
+    --grad-rule:linear-gradient(90deg,#b08a3c,#7a5c1e);
+    --grad-rule-c:linear-gradient(90deg,transparent,#926c23,transparent);
+    --grad-shimmer:linear-gradient(110deg,#7a5c1e 20%,#c9a44e 40%,#8f6c25 55%,#7a5c1e 80%);
+    --grad-skeleton:linear-gradient(100deg,#efe9df 30%,#f7f3ec 50%,#efe9df 70%);
+    --sparkle:#b08a3c;
+    --sheen:rgba(143,108,37,.12);
+  }
+
+  ::selection{@apply bg-gold text-ink}
+  html{scroll-behavior:smooth;font-size:17px}
+  body{overflow-x:hidden}
+  ::-webkit-scrollbar{width:9px}::-webkit-scrollbar-track{background:rgb(var(--c-night))}
+  ::-webkit-scrollbar-thumb{background:var(--grad-rule);border-radius:99px}
+
+  img{opacity:0;transition:opacity .6s ease}
+  img.img-in{opacity:1}
+
+  .eyebrow{@apply flex items-center gap-3 font-body text-xs font-medium uppercase tracking-[0.42em] text-gold}
+  .eyebrow::before,.eyebrow::after{content:'';@apply h-px w-10 bg-gold/50}
+  .accent-it{@apply font-accent italic font-semibold text-gold}
+
+  .btn-gold{@apply relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-r from-gold-deep via-gold to-gold-light font-body text-sm font-semibold uppercase tracking-[0.2em] text-ink transition duration-300 hover:scale-[1.04] hover:shadow-glow active:scale-95}
+  .btn-gold::after{content:'';@apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition duration-700}
+  .btn-gold:hover::after{@apply translate-x-full}
+  .btn-line{@apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-gold/40 font-body text-sm uppercase tracking-[0.2em] text-gold-light transition duration-300 hover:border-gold hover:bg-gold/10 hover:shadow-glow}
+  .btn-gold:disabled,.btn-line:disabled{@apply pointer-events-none}
+  /* Baseline breathing room, so a call site that forgets px-* can never end up
+     with its label touching the border.
+     The type selector is deliberate: Tailwind's preflight sets
+     `button{padding:0}` at specificity 0,0,1, which a bare :where() (0,0,0)
+     loses to. Matching on the element ties preflight and wins on source
+     order, while any explicit px-* utility (0,1,0) still overrides this. */
+  button:where(.btn-gold,.btn-line),
+  a:where(.btn-gold,.btn-line){padding-inline:1.5rem}
+  /* Card footers are narrow; the base 0.2em tracking overflows a half-width
+     button and gets clipped by .btn-gold's overflow-hidden. */
+  .btn-gold.btn-compact,.btn-line.btn-compact{@apply px-2.5 py-2.5 text-[11px] tracking-[0.08em]}
+
+  /* Native number spinners look like a browser control dropped into the page;
+     quantity is driven by the − / + buttons instead. */
+  input[type=number]{-moz-appearance:textfield;appearance:textfield}
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+  /* Quantity stepper — one pill, so it reads as a single control. */
+  .qty{@apply inline-flex items-center gap-1 rounded-full border border-line/15 bg-night/60 p-1}
+  .qty button{@apply flex items-center justify-center rounded-full text-ivory transition hover:bg-gold/15 hover:text-gold-light disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-transparent disabled:hover:text-ivory}
+  .qty input{@apply border-0 bg-transparent text-center text-ivory outline-none focus:ring-0}
+
+  .field{@apply w-full rounded-full border border-line/10 bg-night/70 px-5 py-3 text-[15px] text-ivory placeholder-sand/50 outline-none transition focus:border-gold/70 focus:ring-1 focus:ring-gold/40}
+  textarea.field{@apply rounded-[1.75rem]}
+  .panel{@apply rounded-2xl border border-line/5 bg-card}
+
+  .nav-link{@apply relative py-2 font-body text-[13px] font-medium uppercase tracking-[0.26em] text-ivory/80 transition hover:text-gold-light}
+  .nav-link::after{content:'';@apply absolute bottom-0 left-1/2 h-px w-0 -translate-x-1/2 bg-gold transition-all duration-300}
+  .nav-link:hover::after,.nav-link.active::after{@apply w-full}
+  .nav-link.active{@apply text-gold}
+  .nav-sale{@apply text-gold-light}
+
+  .chip{@apply inline-flex items-center rounded-full border border-line/15 px-5 py-2 font-body text-[12px] uppercase tracking-[0.22em] text-sand transition duration-300 hover:border-gold hover:text-gold-light}
+  .chip.chip-on{@apply border-gold bg-gold/10 text-gold-light}
+
+  .csel .cs-menu{@apply absolute left-0 right-0 z-40 mt-2 hidden origin-top overflow-hidden rounded-2xl border border-gold/25 bg-onyx/95 shadow-lift backdrop-blur-xl}
+  .csel.open .cs-menu{@apply block}
+  @keyframes menuIn{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+  .csel.open .cs-menu{animation:menuIn .22s ease both}
+  .csel.open .cs-chev{@apply rotate-180}
+  .cs-opt{@apply block w-full px-5 py-3 text-left text-[15px] text-ivory/80 transition hover:bg-gold/10 hover:text-gold-light}
+
+  /* ── Mega menu ──
+     The panel is centred on the header, not on its trigger — anchoring it to
+     the nav item pushes a wide panel off the left edge of the viewport. */
+  #primaryNav{@apply relative}
+  .mega{@apply static}
+  .mega-panel{@apply pointer-events-none invisible absolute left-1/2 top-full z-50 w-[min(1300px,94vw)] -translate-x-1/2 translate-y-2 rounded-2xl border border-gold/25 bg-onyx opacity-0 shadow-lift transition duration-300}
+  .mega:hover .mega-panel,.mega.open .mega-panel{@apply pointer-events-auto visible translate-y-0 opacity-100}
+  /* Invisible bridge across the gap between trigger and panel, so travelling
+     down to the menu doesn't drop :hover and flicker it shut. */
+  .mega-panel::before{content:'';@apply absolute -top-7 left-0 right-0 h-7}
+  .mega:hover>.nav-link::after,.mega.open>.nav-link::after{@apply w-full}
+  .mega:hover>.nav-link svg,.mega.open>.nav-link svg{@apply rotate-180}
+
+  /* ── Loading skeletons ── */
+  .skeleton{background:var(--grad-skeleton);background-size:200% 100%;animation:skel 1.4s ease-in-out infinite}
+  @keyframes skel{to{background-position:-200% 0}}
+
+  /* ── Search overlay ── */
+  .search-active{@apply border-gold/60 bg-gold/10}
+
+  .shimmer{background:var(--grad-shimmer);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
+  @keyframes shimmer{to{background-position:200% center}}
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  .marquee-track{display:flex;width:max-content;animation:marquee var(--sp,28s) linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes kb{0%,100%{transform:scale(1)}50%{transform:scale(1.08) translateY(-8px)}}
+  .kenburns img{animation:kb 16s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .floaty{animation:floaty 5s ease-in-out infinite}
+  @keyframes sparkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.9;transform:scale(1) rotate(90deg)}}
+  .sparkle{position:absolute;width:7px;height:7px;background:var(--sparkle);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:sparkle 3.2s ease-in-out infinite;pointer-events:none}
+  @keyframes pageIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .page-anim{animation:pageIn .5s cubic-bezier(.22,1,.36,1) both}
+  @keyframes dropLine{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  .scroll-line span{animation:dropLine 2.2s cubic-bezier(.65,0,.35,1) infinite}
+
+  .shine{position:relative;overflow:hidden}
+  .shine::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,var(--sheen) 50%,transparent 60%);transform:translateX(-130%);transition:transform 1s ease;pointer-events:none}
+  .shine:hover::after{transform:translateX(130%)}
+  .tilt{position:relative}
+  .frame::before{content:'';@apply pointer-events-none absolute inset-3 border border-gold/0 transition duration-500}
+  .frame:hover::before{@apply border-gold/60}
+
+  .draw,.draw-c{position:relative}
+  .draw::after,.draw-c::after{content:'';position:absolute;bottom:-10px;left:0;height:1px;width:100%;background:var(--grad-rule);transform:scaleX(0);transform-origin:left;transition:transform 1.1s ease .25s}
+  .draw-c::after{background:var(--grad-rule-c);transform-origin:center}
+  [data-reveal].revealed .draw::after,[data-reveal].revealed .draw-c::after,[data-reveal].revealed.draw::after,[data-reveal].revealed.draw-c::after{transform:scaleX(1)}
+
+  .f-link{@apply relative transition duration-300}
+  .f-link::before{content:'◆';@apply absolute left-0 top-1/2 -translate-y-1/2 text-[9px] text-gold opacity-0 transition duration-300}
+  .f-link:hover{@apply pl-4 text-gold-light}
+  .f-link:hover::before{@apply opacity-100}
+
+  [data-reveal]{opacity:0;transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+  [data-reveal="up"]{transform:translateY(40px)}[data-reveal="left"]{transform:translateX(-46px)}
+  [data-reveal="right"]{transform:translateX(46px)}[data-reveal="zoom"]{transform:scale(.92)}
+  [data-reveal].revealed{opacity:1;transform:none}
+  /* block, not inline, so a heading that wraps grows its own box */
+  .mask-line{display:block;overflow:hidden}
+  .mask-line>span{display:block;transform:translateY(115%);transition:transform 1.1s cubic-bezier(.22,1,.36,1)}
+  body.loaded .mask-line>span{transform:none}
+
+  .faq-item .acc-body,.acc-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+  .faq-item.open .acc-body,.acc-body.open{grid-template-rows:1fr}
+  .faq-item.open{@apply border-gold/40}
+  .faq-item.open .faq-v{transform:rotate(0)}
+  .faq-item.open .faq-q{@apply text-gold-light}
+
+  #toast{@apply pointer-events-none fixed bottom-8 left-1/2 z-[130] -translate-x-1/2 translate-y-5 rounded-full border border-gold/50 bg-onyx/95 px-7 py-3 text-[15px] tracking-wide text-gold-light opacity-0 shadow-glow backdrop-blur transition-all duration-300}
+  #toast.show{@apply translate-y-0 opacity-100}
+  #toast.toast-error{@apply border-danger/50 text-danger}
+  @keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+  .pop{animation:pop .4s ease}
+  /* The mark is a pale gold gradient. On the dark ground it sits naturally;
+     on the ivory ground its highlights need a whisper of shadow to hold shape. */
+  /* The global img{opacity:0} fade is cleared by the app once a page renders.
+     Chrome logos load before that runs, so they must never depend on it —
+     the brand mark paints even if JavaScript fails entirely. */
+  .brand-logo{opacity:1;filter:drop-shadow(0 1px 2px rgb(0 0 0 / .35))}
+  /* The logo's highlights run to near-white, which disappears against ivory.
+     Darkening and enriching them keeps the mark legible without recolouring it. */
+  html[data-theme="light"] .brand-logo{filter:drop-shadow(0 1px 1px rgb(90 68 26 / .3)) saturate(1.18) brightness(.84) contrast(1.06)}
+
+  .social{@apply flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line/15 text-sand transition duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold hover:shadow-glow}
+
+  /* Show the mode you're switching TO, matching the button's aria-label:
+     a sun while dark, a moon while light. */
+  .icon-to-dark{@apply hidden}
+  html[data-theme="light"] .icon-to-dark{@apply block}
+  html[data-theme="light"] .icon-to-light{@apply hidden}
+
+  /* Artwork drawn on a black ground keeps a dark panel in both palettes. */
+  .panel-artwork{background:#0f0c09}
+
+  /* Respect reduced-motion preferences across every decorative animation. */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+    .marquee-track{animation:none}
+  }
+</style>
+</head>
+
+<body class="overflow-hidden bg-night font-body text-sand antialiased">
+
+<!-- ═══ 4. LAYOUT ═══ -->
+<div id="preloader" class="fixed inset-0 z-[200] flex flex-col items-center justify-center gap-6 bg-night transition-opacity duration-700">
+  <img src="/assets/img/logo-full.webp" alt="Parshiv Jewels" width="640" height="823" fetchpriority="high" decoding="async"
+    class="brand-logo w-[150px] max-w-[48vw] sm:w-[180px]">
+  <div class="h-[2px] w-60 overflow-hidden rounded-full bg-line/10"><div id="loadBar" class="h-full w-0 bg-gradient-to-r from-gold-deep via-gold to-gold-light transition-all duration-150"></div></div>
+  <p id="loadPct" class="text-[11px] tracking-[0.4em] text-gold-light">0%</p>
+</div>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[300] focus:rounded-full focus:bg-gold focus:px-5 focus:py-2 focus:text-ink">Skip to content</a>
+<div id="progress" class="fixed left-0 top-0 z-[101] h-[2px] w-0 bg-gradient-to-r from-gold-deep via-gold to-gold-light"></div>
+
+<!-- Announcement bar -->
+<div class="marquee overflow-hidden border-b border-gold/15 bg-onyx py-2">
+  <div class="marquee-track text-[11px] uppercase tracking-[0.3em] text-sand/90">
+    <div class="flex shrink-0"><span class="px-6">◆ Complimentary Insured Shipping</span><span class="px-6">◆ BIS Hallmarked</span><span class="px-6">◆ 30-Day Returns</span><span class="px-6">◆ Certified Stones</span><span class="px-6">◆ Order on WhatsApp +91 63519 16996</span></div>
+    <div class="flex shrink-0" aria-hidden="true"><span class="px-6">◆ Complimentary Insured Shipping</span><span class="px-6">◆ BIS Hallmarked</span><span class="px-6">◆ 30-Day Returns</span><span class="px-6">◆ Certified Stones</span><span class="px-6">◆ Order on WhatsApp +91 63519 16996</span></div>
+  </div>
+</div>
+
+<header id="navbar" class="sticky top-0 z-[100] border-b border-gold/10 bg-night/85 backdrop-blur-md transition-shadow duration-500">
+  <div class="mx-auto grid max-w-[1500px] grid-cols-[1fr_auto_1fr] items-center px-5 py-4 lg:px-8">
+    <div class="flex items-center gap-3">
+      <button id="mobileMenuBtn" class="text-ivory lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 7h18M3 12h12M3 17h18"/></svg>
+      </button>
+      <p class="hidden text-[11px] uppercase tracking-[0.35em] text-sand lg:block">Surat · Est. 2026</p>
+    </div>
+
+    <a href="/" data-href="/" class="group flex items-center justify-center gap-2.5 sm:gap-3.5" aria-label="Parshiv Jewels — home">
+      <img src="/assets/img/logo-mark.webp" alt="" width="400" height="552" fetchpriority="high" decoding="async"
+        class="brand-logo h-10 w-auto shrink-0 transition duration-500 group-hover:scale-[1.06] sm:h-12">
+      <img src="/assets/img/logo-wordmark.webp" alt="Parshiv Jewels" width="720" height="232" fetchpriority="high" decoding="async"
+        class="brand-logo h-[22px] w-auto shrink-0 sm:h-7">
+    </a>
+
+    <div class="flex items-center justify-end gap-2.5">
+      <button id="themeBtn" class="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 text-gold transition hover:bg-gold hover:text-ink" aria-label="Switch to light mode">
+        <svg class="icon-to-dark h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-to-light h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2 12h2.2M19.8 12H22M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+      </button>
+      <button id="searchBtn" class="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 text-gold transition hover:bg-gold hover:text-ink" aria-label="Search products">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <button id="cartBtn" class="relative flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 text-gold transition hover:bg-gold hover:text-ink" aria-label="Open cart">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span id="cartCount" class="absolute -right-1 -top-1 hidden h-5 min-w-[20px] items-center justify-center rounded-full bg-gold px-1 text-[11px] font-bold text-ink">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Desktop navigation + mega menu (populated by components/navigation.js) -->
+  <nav id="primaryNav" class="hidden justify-center gap-9 border-t border-line/5 pb-3 pt-2 lg:flex" aria-label="Primary"></nav>
+  <div class="h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+</header>
+
+<!-- Mobile navigation drawer -->
+<div id="mobileNavOverlay" class="pointer-events-none fixed inset-0 z-[104] bg-veil/70 opacity-0 backdrop-blur-sm transition duration-300 lg:hidden"></div>
+<aside id="mobileNav" class="fixed left-0 top-0 z-[108] flex h-full w-[86%] max-w-sm -translate-x-full flex-col border-r border-gold/25 bg-onyx shadow-soft transition-transform duration-300 ease-out lg:hidden" aria-label="Mobile navigation" aria-hidden="true">
+  <div class="flex items-center justify-between border-b border-gold/15 px-6 py-5">
+    <img src="/assets/img/logo-wordmark.webp" alt="Parshiv Jewels" width="720" height="232"
+      loading="lazy" decoding="async" class="brand-logo h-6 w-auto">
+    <button id="mobileNavClose" class="flex h-10 w-10 items-center justify-center rounded-full border border-line/15 text-ivory transition hover:border-gold hover:text-gold" aria-label="Close menu">✕</button>
+  </div>
+  <nav id="mobileNavList" class="flex-1 overflow-y-auto px-6 py-2" aria-label="Mobile"></nav>
+  <div class="border-t border-gold/15 px-6 py-5">
+    <a href="/contact" data-href="/contact" data-mobile-close class="btn-gold w-full py-3.5">Contact Us</a>
+    <div class="mt-4 flex justify-center gap-3">
+      <a href="https://wa.me/916351916996" target="_blank" rel="noopener" aria-label="WhatsApp" class="social"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.instagram.com/parshivjewels.in/" target="_blank" rel="noopener" aria-label="Instagram" class="social"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.148-.558-2.913-.306-.788-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ 5. APP MOUNT ═══ -->
+<main id="main" class="relative min-h-[60vh]"></main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="border-t border-gold/15 bg-onyx">
+  <div class="mx-auto grid max-w-[1500px] gap-12 px-5 py-16 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
+    <div class="lg:col-span-2">
+      <h2 class="sr-only">Parshiv Jewels</h2>
+      <img src="/assets/img/logo-full.webp" alt="Parshiv Jewels — a new legacy of elegance" width="640" height="823"
+        loading="lazy" decoding="async" class="brand-logo w-[132px]">
+      <p class="mt-4 max-w-sm text-[15px] leading-relaxed">Precision-crafted luxury jewellery designed to be worn, appreciated, and passed down through generations. Made in Mahidharpura, Surat.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="https://www.instagram.com/parshivjewels.in/" target="_blank" rel="noopener" aria-label="Instagram" class="social"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.148-.558-2.913-.306-.788-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.296-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></a>
+        <a href="https://wa.me/916351916996" target="_blank" rel="noopener" aria-label="WhatsApp" class="social"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" class="social"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-sand/70">
+        <span class="rounded-full border border-line/10 px-3 py-1.5">BIS Hallmarked</span>
+        <span class="rounded-full border border-line/10 px-3 py-1.5">Certified Stones</span>
+        <span class="rounded-full border border-line/10 px-3 py-1.5">Insured Shipping</span>
+      </div>
+    </div>
+
+    <nav aria-labelledby="foot-shop">
+      <h2 id="foot-shop" class="font-display text-xl font-semibold text-ivory">Shop</h2>
+      <ul class="mt-5 space-y-3 text-[15px]">
+        <li><a href="/shop/new-arrivals" data-href="/shop/new-arrivals" class="f-link">New Arrivals</a></li>
+        <li><a href="/shop/necklaces" data-href="/shop/necklaces" class="f-link">Necklaces</a></li>
+        <li><a href="/shop/earrings" data-href="/shop/earrings" class="f-link">Earrings</a></li>
+        <li><a href="/shop/rings" data-href="/shop/rings" class="f-link">Rings</a></li>
+        <li><a href="/shop/bracelets" data-href="/shop/bracelets" class="f-link">Bracelets</a></li>
+        <li><a href="/shop/best-sellers" data-href="/shop/best-sellers" class="f-link">Best Sellers</a></li>
+        <li><a href="/shop/sale" data-href="/shop/sale" class="f-link">Sale</a></li>
+        <li><a href="/collections" data-href="/collections" class="f-link">Collections</a></li>
+      </ul>
+    </nav>
+
+    <nav aria-labelledby="foot-help">
+      <h2 id="foot-help" class="font-display text-xl font-semibold text-ivory">Help</h2>
+      <ul class="mt-5 space-y-3 text-[15px]">
+        <li><a href="/contact" data-href="/contact" class="f-link">Contact Us</a></li>
+        <li><a href="/faq" data-href="/faq" class="f-link">FAQ</a></li>
+        <li><a href="/shipping-delivery" data-href="/shipping-delivery" class="f-link">Shipping &amp; Delivery</a></li>
+        <li><a href="/returns-refunds" data-href="/returns-refunds" class="f-link">Returns &amp; Refunds</a></li>
+        <li><a href="/cancellation-policy" data-href="/cancellation-policy" class="f-link">Cancellation Policy</a></li>
+        <li><a href="/size-guide" data-href="/size-guide" class="f-link">Size Guide</a></li>
+        <li><a href="/diamond-guide" data-href="/diamond-guide" class="f-link">Diamond Guide</a></li>
+        <li><a href="/certification-guide" data-href="/certification-guide" class="f-link">Certification Guide</a></li>
+        <li><a href="/jewelry-care" data-href="/jewelry-care" class="f-link">Jewelry Care</a></li>
+        <li><a href="/cart" data-href="/cart" class="f-link">Your Cart</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="font-display text-xl font-semibold text-ivory">The House</h2>
+      <ul class="mt-5 space-y-3 text-[15px]">
+        <li><a href="/about" data-href="/about" class="f-link">About Us</a></li>
+        <li><a href="/our-story" data-href="/our-story" class="f-link">Our Story</a></li>
+        <li><a href="/gallery" data-href="/gallery" class="f-link">The Gallery</a></li>
+        <li><a href="/custom-design" data-href="/custom-design" class="f-link">Design Your Own</a></li>
+      </ul>
+      <ul class="mt-7 space-y-4 text-[15px]">
+        <li class="flex items-center gap-4"><span class="social text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><a href="tel:+916351916996" data-site-phone class="hover:text-gold-light">+91 63519 16996</a></li>
+        <li class="flex items-center gap-4"><span class="social text-gold" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><a href="tel:+919099488850" data-site-phone-secondary class="hover:text-gold-light">+91 90994 88850</a></li>
+        <li class="flex items-center gap-4"><span class="social text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span><a href="mailto:Parshivjewels.in@gmail.com" data-site-email class="break-all hover:text-gold-light">Parshivjewels.in@gmail.com</a></li>
+        <li class="flex items-start gap-4"><span class="social text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span><address data-site-address class="not-italic leading-relaxed">102, Shiv Narayan House, Kansara Seri, Mahidharpura, Surat, Gujarat 395003</address></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-line/5"><div class="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-3 px-5 py-6 text-sm sm:flex-row lg:px-8">
+    <p>© 2026 PARSHIV JEWELS. Crafted with precision.</p>
+    <div class="flex flex-wrap justify-center gap-6">
+      <a href="/privacy-policy" data-href="/privacy-policy" class="hover:text-gold-light">Privacy Policy</a>
+      <a href="/terms-conditions" data-href="/terms-conditions" class="hover:text-gold-light">Terms &amp; Conditions</a>
+      <a href="/faq" data-href="/faq" class="hover:text-gold-light">FAQ</a>
+    </div>
+  </div></div>
+</footer>
+
+<!-- ═══ 6. COMPONENTS ═══ -->
+
+<!-- Search overlay -->
+<div id="searchOverlay" class="fixed inset-0 z-[120] hidden items-start justify-center" role="dialog" aria-modal="true" aria-label="Search" aria-hidden="true">
+  <div class="absolute inset-0 bg-veil/80 backdrop-blur-sm" data-search-backdrop></div>
+  <div class="relative mt-[8vh] w-full max-w-3xl px-5">
+    <div class="panel max-h-[80dvh] overflow-y-auto border-gold/25 p-7 shadow-soft sm:p-9" style="animation:menuIn .3s ease both">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="font-display text-2xl font-semibold text-ivory">Search</h2>
+        <button id="searchClose" class="flex h-10 w-10 items-center justify-center rounded-full border border-line/15 text-ivory transition hover:border-gold hover:text-gold" aria-label="Close search">✕</button>
+      </div>
+      <form id="searchForm" class="mt-6" novalidate role="search">
+        <label class="sr-only" for="searchInput">Search products</label>
+        <div class="relative">
+          <span class="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-gold" aria-hidden="true">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </span>
+          <input id="searchInput" class="field !pl-12" placeholder="Search necklaces, jhumkas, solitaires…" autocomplete="off" spellcheck="false">
+        </div>
+      </form>
+      <div id="searchResults" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart drawer -->
+<div id="cartOverlay" class="pointer-events-none fixed inset-0 z-[105] bg-veil/70 opacity-0 backdrop-blur-sm transition duration-300"></div>
+<aside id="cartDrawer" class="fixed right-0 top-0 z-[110] flex h-full w-full max-w-md translate-x-full flex-col border-l border-gold/25 bg-onyx shadow-soft transition-transform duration-300 ease-out" aria-label="Shopping cart" aria-hidden="true">
+  <div class="flex items-center justify-between border-b border-gold/15 px-6 py-5">
+    <h2 class="font-display text-2xl font-semibold text-ivory">Your Cart <span id="cartHeaderCount" class="text-gold">(0)</span></h2>
+    <button id="cartClose" class="flex h-10 w-10 items-center justify-center rounded-full border border-line/15 text-ivory transition hover:border-gold hover:text-gold" aria-label="Close cart">✕</button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-5"></div>
+  <div id="cartFooter" class="border-t border-gold/15 px-6 py-6"></div>
+</aside>
+
+<!-- Quick view -->
+<div id="modal" class="fixed inset-0 z-[115] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="absolute inset-0 bg-veil/75 backdrop-blur-sm" data-close></div>
+  <div class="relative grid w-full max-w-3xl overflow-hidden rounded-2xl border border-gold/30 bg-onyx shadow-glow md:grid-cols-2" style="animation:menuIn .3s ease both">
+    <span class="pointer-events-none absolute left-3 top-3 z-10 h-4 w-4 border-l border-t border-gold/70"></span>
+    <span class="pointer-events-none absolute right-3 top-3 z-10 h-4 w-4 border-r border-t border-gold/70"></span>
+    <span class="pointer-events-none absolute bottom-3 left-3 z-10 h-4 w-4 border-b border-l border-gold/70"></span>
+    <span class="pointer-events-none absolute bottom-3 right-3 z-10 h-4 w-4 border-b border-r border-gold/70"></span>
+    <button id="modalCloseBtn" class="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-line/20 bg-night/70 text-ivory backdrop-blur transition hover:border-gold hover:text-gold md:hidden" aria-label="Close quick view">✕</button>
+    <div class="relative h-60 bg-night sm:h-72 md:h-[480px]">
+      <div class="absolute inset-0 flex items-center justify-center" aria-hidden="true"><span class="h-3 w-3 rotate-45 animate-ping bg-gold/60"></span></div>
+      <img id="modalImg" onerror="imgFix(this)" src="" alt="" decoding="async" class="relative h-full w-full object-cover">
+    </div>
+    <div id="modalBody" class="flex flex-col p-8 md:h-[480px] md:overflow-y-auto"></div>
+  </div>
+</div>
+
+<button id="backTop" class="fixed bottom-6 right-6 z-[95] flex h-12 w-12 translate-y-20 items-center justify-center rounded-full border border-gold/50 bg-onyx text-gold opacity-0 transition duration-500 hover:bg-gold hover:text-ink" aria-label="Back to top">↑</button>
+<div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span></div>
+
+<!-- ═══ 7. ENGINE ═══ -->
+<script type="module" src="/assets/js/app.js"></script>
+<script>
+/* Boot watchdog. The app clears this the moment it renders its first route.
+   If it never does — modules blocked on file://, a half-finished upload, a
+   stale cache — say so plainly instead of leaving the preloader at 0%. */
+(function () {
+  var TIMEOUT = 5000;
+  window.__pjBooted = false;
+  setTimeout(function () {
+    if (window.__pjBooted) return;
+    // The standalone build is *meant* to run from file://, so it gets the
+    // generic message rather than 'use a web server'.
+    var isFile = location.protocol === 'file:' && !window.__pjStandalone;
+    var pre = document.getElementById('preloader');
+    if (!pre) return;
+    pre.innerHTML =
+      '<div class="mx-auto max-w-lg px-6 text-center">' +
+        '<p class="font-display text-4xl tracking-[0.2em] text-gold">PJ</p>' +
+        '<h1 class="mt-6 font-display text-2xl text-ivory">' +
+          (isFile ? 'Please open this site through a web server' : 'The site could not finish loading') +
+        '</h1>' +
+        '<p class="mt-4 text-[15px] leading-relaxed text-sand">' +
+          (isFile
+            ? 'Browsers block JavaScript modules on <code class="text-gold-light">file://</code> addresses, so opening this file directly cannot work. Run the bundled preview server, then visit <span class="text-gold-light">http://localhost:4173</span>:'
+            : 'The application scripts in <code class="text-gold-light">assets/js/</code> did not load. Check that the whole folder was uploaded and that your browser cache is cleared.') +
+        '</p>' +
+        (isFile
+          ? '<pre class="mt-5 overflow-x-auto rounded-xl border border-gold/25 bg-onyx px-5 py-4 text-left text-[13px] text-gold-light">node tools/dev-server.mjs</pre>' +
+            '<p class="mt-5 text-[13px] text-sand/80">Or open <span class="text-gold-light">index.standalone.html</span>, which is built to run without a server.</p>'
+          : '') +
+        '<p class="mt-8 text-[13px] text-sand/80">Need us? WhatsApp <a class="text-gold-light underline" href="https://wa.me/916351916996">+91 63519 16996</a></p>' +
+      '</div>';
+    document.body.classList.remove('overflow-hidden');
+  }, TIMEOUT);
+})();
+</script>
+<noscript>
+  <div class="mx-auto max-w-2xl px-6 py-20 text-center">
+    <h2 class="font-display text-3xl text-ivory">JavaScript is required</h2>
+    <p class="mt-4 text-[15px]">Please enable JavaScript to browse our catalogue, or message us directly on WhatsApp at
+      <a href="https://wa.me/916351916996" class="text-gold-light underline">+91 63519 16996</a>.</p>
+  </div>
+</noscript>
+</body>
+</html>
