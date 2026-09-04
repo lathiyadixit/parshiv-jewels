@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /order-enquiry
+Disallow: /search
+Disallow: /admin.html
+Disallow: /admin
+
+Sitemap: https://parshivjewels.in/sitemap.xml
